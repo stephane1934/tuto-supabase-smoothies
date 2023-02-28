@@ -28,7 +28,6 @@ export default function Create() {
     }
 
     if (data) {
-      console.log(data);
       setFormError(null);
       navigate("/");
     }
