@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import supabase from "../config/supabaseClient";
 
 export default function SmoothieCard({ smoothie }) {
+  async function handleDelete() {
+    const { error } = await supabase
+      .from("smoothies")
+      .delete()
+      .eq("id", smoothie.id);
+
+    if (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="smoothie-card">
       <h3>{smoothie.title}</h3>
@@ -10,6 +22,9 @@ export default function SmoothieCard({ smoothie }) {
         <Link to={"/" + smoothie.id}>
           <i className="material-icons">edit</i>
         </Link>
+        <i className="material-icons" onClick={handleDelete}>
+          delete
+        </i>
       </div>
     </div>
   );
